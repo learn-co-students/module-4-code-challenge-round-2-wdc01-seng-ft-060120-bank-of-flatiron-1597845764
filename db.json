@@ -90,6 +90,20 @@
       "category": "asdads",
       "amount": "1000",
       "id": 13
+    },
+    {
+      "date": "2020-08-01",
+      "description": "it worked",
+      "category": "ps",
+      "amount": "36",
+      "id": 14
+    },
+    {
+      "date": "2020-08-01",
+      "description": "it worked",
+      "category": "ps",
+      "amount": "36",
+      "id": 15
     }
   ]
 }

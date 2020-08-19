@@ -42,7 +42,9 @@ class AccountContainer extends Component {
       })
     })
     .then(res => res.json())
-    .then(transaction => console.log())
+    .then(transaction => {
+      this.updateTransactions(transaction)
+    })
   }
 
   handleDate = (date) => {
@@ -75,6 +77,13 @@ class AccountContainer extends Component {
       this.setState({
         amount: newAmount
       })
+  }
+
+  updateTransactions = (transaction) => {
+    let newArray = [...this.state.transactions, transaction]
+    this.setState({
+      transactions: newArray
+    })
   }
 
 
