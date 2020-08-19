@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class AddTransactionForm extends Component {
+
   render() {
     return (
       <div className="ui segment">
@@ -16,7 +17,7 @@ class AddTransactionForm extends Component {
               step="0.01"
             />
           </div>
-          <button className="ui button" type="submit">
+          <button className="ui button" type="submit" onClick={(e) => this.props.handleAdd(e)}>
             Add Transaction
           </button>
         </form>
