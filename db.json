@@ -1,4 +1,4 @@
-{
+gi{
   "transactions": [
     {
       "id": 1,
@@ -83,6 +83,20 @@
       "description": "Venmo, Pay Roommate for Rent",
       "category": "Housing",
       "amount": -975
+    },
+    {
+      "date": "2020-08-06",
+      "description": "africa monster",
+      "category": "expenses",
+      "amount": "0.05",
+      "id": 13
+    },
+    {
+      "date": "2020-08-20",
+      "description": "Europe",
+      "category": "travel",
+      "amount": "0.08",
+      "id": 14
     }
   ]
 }
