@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TransactionsList from "./TransactionsList";
 import Search from "./Search";
+import Sort from "./Sort";
 import AddTransactionForm from "./AddTransactionForm";
 
 class AccountContainer extends Component {
@@ -8,6 +9,7 @@ class AccountContainer extends Component {
   state = {
     transactions: [],
     displayedTransactions: [],
+    sortBy: 'None'
   }
 
   componentDidMount() {
@@ -46,6 +48,39 @@ class AccountContainer extends Component {
     })
   }
 
+  deleteTransaction = (transaction) => {
+
+    fetch(`http://localhost:6001/transactions/${transaction.id}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    })
+    .then(resp => resp.json())
+    .then(() => {
+      let remainingTransactions = this.state.displayedTransactions.filter( t => !(t === transaction))
+      this.setState({
+        transaction: remainingTransactions,
+        displayedTransactions: remainingTransactions
+      })
+    })
+  }
+
+  changeSortBy = (sort) => {this.setState({ sortBy: sort})}
+
+  sortInvoke = () => {
+    let transactions = [...this.state.displayedTransactions]
+    let sortBy = this.state.sortBy 
+
+    if ( sortBy === 'Category') {
+      transactions.sort((t1, t2) => t1.category.localeCompare(t2.category))
+    } else if ( sortBy === 'Description') {
+      transactions.sort((t1, t2) => t1.description.localeCompare(t2.description))
+    }
+
+    return transactions
+  }
+
 
   render() {
     return (
@@ -53,11 +88,18 @@ class AccountContainer extends Component {
         <Search 
           changeSearch={this.changeSearch}
         />
+        <br></br>
+        <Sort
+          changeSortBy={this.changeSortBy}
+          sortBy={this.state.sortBy}
+        />
+
         <AddTransactionForm 
           addTransaction={this.addTransaction}
         />
         <TransactionsList 
-          transactions={this.state.displayedTransactions}
+          transactions={this.sortInvoke()}
+          deleteTransaction={this.deleteTransaction}
         />
       </div>
     );
