@@ -67,10 +67,20 @@ class AccountContainer extends Component {
     })
   }
 
+  handleSearch = (e) =>{
+    // console.log(e.target.value)
+    let filterTrans = this.state.transactions
+    filterTrans.filter( trans => {
+      if(trans.description.toLowerCase() === e.target.value.toLowerCase()){
+        return trans
+      }
+    } )
+  }
+
   render() {
     return (
       <div>
-        <Search />
+        <Search handleSearch = {this.handleSearch}/>
         <AddTransactionForm handleDate = {this.handleDate} 
           handleDescription = {this.handleDescription}
           handleCategory = {this.handleCategory}
